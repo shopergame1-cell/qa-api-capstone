@@ -6,33 +6,32 @@ import io.restassured.response.Response;
 
 import java.util.Map;
 
-/** Клієнт для публічних стендів (еталонна реалізація). */
+/** Клієнт до JSONPlaceholder (еталонна реалізація). */
 public class ApiClient {
 
-    public static final String HTTPBIN = "https://httpbin.org";
-    public static final String JSONPLACEHOLDER = "https://jsonplaceholder.typicode.com";
+    public static final String BASE_URI = "https://jsonplaceholder.typicode.com";
 
     public Response getPost(int id) {
-        return RestAssured.given().baseUri(JSONPLACEHOLDER).get("/posts/" + id);
+        return RestAssured.given().baseUri(BASE_URI).get("/posts/" + id);
     }
 
     public Response getPostsByUser(int userId) {
-        return RestAssured.given().baseUri(JSONPLACEHOLDER).queryParam("userId", userId).get("/posts");
+        return RestAssured.given().baseUri(BASE_URI).queryParam("userId", userId).get("/posts");
     }
 
-    public Response postJson(String name, int value) {
+    public Response getUser(int id) {
+        return RestAssured.given().baseUri(BASE_URI).get("/users/" + id);
+    }
+
+    public Response createPost(String title, String body, int userId) {
         return RestAssured.given()
-                .baseUri(HTTPBIN)
+                .baseUri(BASE_URI)
                 .contentType(ContentType.JSON)
-                .body(Map.of("name", name, "value", value))
-                .post("/post");
-    }
-
-    public Response status(int code) {
-        return RestAssured.given().baseUri(HTTPBIN).get("/status/" + code);
+                .body(Map.of("title", title, "body", body, "userId", userId))
+                .post("/posts");
     }
 
     public Response missingPost(int id) {
-        return RestAssured.given().baseUri(JSONPLACEHOLDER).get("/posts/" + id);
+        return RestAssured.given().baseUri(BASE_URI).get("/posts/" + id);
     }
 }
