@@ -18,6 +18,13 @@ jobs:
           cache: maven
       - name: Прогін тестів
         run: mvn -B -q test
+      - name: Звіт surefire (щоб було видно, що саме впало)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+          if-no-files-found: ignore
       - name: Нотатка про результат
         if: success()
         run: |

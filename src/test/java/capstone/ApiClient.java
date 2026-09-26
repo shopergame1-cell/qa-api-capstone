@@ -3,40 +3,39 @@ package capstone;
 import io.restassured.response.Response;
 
 /**
- * Клієнт для публічних стендів. TODO: реалізуй методи.
+ * Клієнт до публічного стенду JSONPlaceholder. TODO: реалізуй методи.
  *
  * Вимоги:
- *  - жодних хардкодів URL у тестах — усе тут;
- *  - перевірки (assertions) живуть у тестах, клієнт лише виконує запити;
- *  - методи повертають Response або готове значення.
+ *  - жодних URL у тестах — усе тут;
+ *  - клієнт лише виконує запити й повертає Response, перевірки живуть у тестах;
+ *  - методи не мусять самі кидати помилок на 404 — це нормальна відповідь.
  */
 public class ApiClient {
 
-    public static final String HTTPBIN = "https://httpbin.org";
-    public static final String JSONPLACEHOLDER = "https://jsonplaceholder.typicode.com";
+    public static final String BASE_URI = "https://jsonplaceholder.typicode.com";
 
-    /** GET {JSONPLACEHOLDER}/posts/1 */
+    /** GET /posts/1 */
     public Response getPost(int id) {
-        throw new UnsupportedOperationException("TODO: зроби GET /posts/{id} і поверни Response");
+        throw new UnsupportedOperationException("TODO: GET /posts/{id}");
     }
 
-    /** GET {JSONPLACEHOLDER}/posts?userId=1 */
+    /** GET /posts?userId=1 */
     public Response getPostsByUser(int userId) {
-        throw new UnsupportedOperationException("TODO: зроби GET /posts з query-параметром userId");
+        throw new UnsupportedOperationException("TODO: GET /posts з query-параметром userId");
     }
 
-    /** POST {HTTPBIN}/post з JSON-тілом */
-    public Response postJson(String name, int value) {
-        throw new UnsupportedOperationException("TODO: надішли JSON {"name": name, "value": value} і поверни Response");
+    /** GET /users/1 */
+    public Response getUser(int id) {
+        throw new UnsupportedOperationException("TODO: GET /users/{id}");
     }
 
-    /** GET {HTTPBIN}/status/200 */
-    public Response status(int code) {
-        throw new UnsupportedOperationException("TODO: зроби GET /status/{code}");
+    /** POST /posts з JSON-тілом {title, body, userId} */
+    public Response createPost(String title, String body, int userId) {
+        throw new UnsupportedOperationException("TODO: POST /posts з JSON-тілом");
     }
 
-    /** GET {JSONPLACEHOLDER}/posts/{id} для неіснуючого id */
+    /** GET /posts/{id} для неіснуючого id (очікуємо 404) */
     public Response missingPost(int id) {
-        throw new UnsupportedOperationException("TODO: зроби GET /posts/{id} (очікуємо 404)");
+        throw new UnsupportedOperationException("TODO: GET /posts/{id}");
     }
 }
